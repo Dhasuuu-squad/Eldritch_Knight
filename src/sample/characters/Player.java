@@ -19,4 +19,20 @@ public class Player {
     public ImageView player = new ImageView();
 
     public Image knight = new Image("sample/media/player.png");
+
+    public String[] optionDetails = {
+            "Swings the sword with great momentum towards the enemy",
+            "Uses magical daggers and throw them at the enemy",
+            "By the name of Hercules, your strength increases ",
+            "By the grace of Goddess Athena, you become more resistive",
+            "Block enemy's any attack"
+    } ;
+
+    public String[] optionInfo = {
+            "Damage: 200",
+            "Damage: 200\nTurns: 5",
+            "Damage increase: 20%+\nTurns: 5",
+            "Defence increase: 20%+\nTurns: 5",
+            "Turns: 5",
+    };
 }
