@@ -19,7 +19,7 @@ import sample.characters.Player;
 import sample.utility.CustomAnimation;
 import sample.utility.DetailsBar;
 import sample.utility.Feedback;
-
+import sample.utility.HealthBar;
 
 
 public class BattleScreen {
@@ -75,8 +75,16 @@ public class BattleScreen {
 
     CustomAnimation animation = new CustomAnimation();
     DetailsBar detailsBar = new DetailsBar();
+    static HealthBar playerHealthBar;
+    static HealthBar enemyHealthBar;
+
      public void startBattle(){
          GridPane grid = new GridPane();
+         playerHealthBar = new HealthBar(300,"Player");
+         enemyHealthBar = new HealthBar(300,"Enemy");
+         pane.getChildren().addAll(playerHealthBar.createHealthBar(),enemyHealthBar.createHealthBar());
+         playerHealthBar.setLayoutX(15,30);
+         enemyHealthBar.setLayoutX(476,645);
 
 
          outerBorder.setFill(Color.valueOf("#af0404"));
@@ -106,6 +114,7 @@ public class BattleScreen {
          grid.setAlignment(Pos.CENTER);
 
          choiceBox.getChildren().add(grid);
+
 
 
     }
