@@ -41,8 +41,8 @@ public class Constants {
             "-fx-border-color: white;"+"-fx-border-width: 5;"+"-fx-font-size: 16px;"
             +"-fx-font-weight: bold;"+"-fx-text-fill:white;"+"-fx-border-radius: 20";
 
-    public final String kSideBarStyle = "-fx-background-color: #fa1616;"+"-fx-background-radius:20;"+
-            "-fx-border-color: #900d0d;"+"-fx-border-width: 5;"+"-fx-font-size: 16px;"
-            +"-fx-font-weight: bold;"+"-fx-text-fill:black;"+"-fx-border-radius: 20";
+    public final String kSideBarStyle = "-fx-background-color: #fa1616 ;"+"-fx-background-radius:25;"+
+            "-fx-border-color: #af0404;"+"-fx-border-width: 10;"+"-fx-font-size: 16px;"
+            +"-fx-font-weight: bold;"+"-fx-text-fill:black;"+"-fx-border-radius: 15";
 
 }

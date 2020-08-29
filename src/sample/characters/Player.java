@@ -31,8 +31,8 @@ public class Player {
     public String[] optionInfo = {
             "Damage: 200",
             "Damage: 200\nTurns: 5",
-            "Damage increase: 20%+\nTurns: 5",
-            "Defence increase: 20%+\nTurns: 5",
+            "Damage boost: 20%\nTurns: 5",
+            "Defence boost: 20%\nTurns: 5",
             "Turns: 5",
     };
 }
