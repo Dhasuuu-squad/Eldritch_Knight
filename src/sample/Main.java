@@ -36,6 +36,7 @@ public class Main extends Application {
     }
 }
 
-//TODO: set details of every attack
-//TODO: set info of every option
+//TODO: set details of every attack :DONE
+//TODO: set info of every option :DONE
+//TODO: make health bars
 
