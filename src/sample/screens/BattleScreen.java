@@ -16,6 +16,9 @@ import sample.Constants;
 import sample.Main;
 import sample.characters.Enemy;
 import sample.characters.Player;
+import sample.game_logic.EnemyInput;
+import sample.game_logic.PlayerInput;
+import sample.game_logic.Process;
 import sample.utility.CustomAnimation;
 import sample.utility.DetailsBar;
 import sample.utility.Feedback;
@@ -73,19 +76,23 @@ public class BattleScreen {
         Main.window.setScene(scene);
     }
 
+    public static GridPane grid;
+
     CustomAnimation animation = new CustomAnimation();
     DetailsBar detailsBar = new DetailsBar();
     static HealthBar playerHealthBar;
     static HealthBar enemyHealthBar;
+    static Process process = new Process();
+    static PlayerInput playerInput = new PlayerInput(process);
+    static EnemyInput enemyInput = new EnemyInput(process);
 
      public void startBattle(){
-         GridPane grid = new GridPane();
+         grid = new GridPane();
          playerHealthBar = new HealthBar(300,"Player");
          enemyHealthBar = new HealthBar(300,"Enemy");
          pane.getChildren().addAll(playerHealthBar.createHealthBar(),enemyHealthBar.createHealthBar());
          playerHealthBar.setLayoutX(15,30);
          enemyHealthBar.setLayoutX(476,645);
-
 
          outerBorder.setFill(Color.valueOf("#af0404"));
          rectangle.setFill(Color.valueOf("#0b0b0d"));
@@ -104,6 +111,27 @@ public class BattleScreen {
          }
 
 
+         swordAttack.setOnAction(actionEvent -> {
+             enemyInput.optionSelector();
+             playerInput.swordAttack(swordAttack);
+         });
+         magicAttack.setOnAction(actionEvent -> {
+             enemyInput.optionSelector();
+             playerInput.magicAttack(magicAttack);
+         });
+         powerUp.setOnAction(actionEvent -> {
+             enemyInput.optionSelector();
+             playerInput.buffAttack(powerUp);
+         });
+         defenseUp.setOnAction(actionEvent -> {
+             enemyInput.optionSelector();
+             playerInput.buffDefense(defenseUp);
+         });
+         block.setOnAction(actionEvent -> {
+             enemyInput.optionSelector();
+             playerInput.block(block);
+         });
+
          grid.setHgap(20);
          grid.setVgap(10);
          grid.add(swordAttack, 0, 0);
@@ -114,8 +142,6 @@ public class BattleScreen {
          grid.setAlignment(Pos.CENTER);
 
          choiceBox.getChildren().add(grid);
-
-
 
     }
 
