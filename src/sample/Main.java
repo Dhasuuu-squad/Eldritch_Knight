@@ -9,7 +9,7 @@ public class Main extends Application {
 
     public static Stage window = new Stage();
     @Override
-    public void start(Stage primaryStage)throws Exception{
+    public void start(Stage primaryStage){
 //        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
 
         window = primaryStage;
@@ -38,5 +38,6 @@ public class Main extends Application {
 
 //TODO: set details of every attack :DONE
 //TODO: set info of every option :DONE
-//TODO: make health bars
+//TODO: make health bars :DONE
+//TODO: make animations for every action
 
