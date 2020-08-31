@@ -35,4 +35,8 @@ public class Player {
             "Defence boost: 20%\nTurns: 5",
             "Turns: 5",
     };
+
+
+
+
 }
