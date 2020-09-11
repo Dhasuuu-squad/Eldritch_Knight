@@ -24,17 +24,19 @@ import sample.utility.DetailsBar;
 import sample.utility.Feedback;
 import sample.utility.HealthBar;
 
+import java.util.ArrayList;
+
 
 public class BattleScreen {
 
-    Player knight = new Player();
+    public static  Player knight = new Player();
     Enemy enemy = new Enemy();
     Constants constants = new Constants();
     Feedback feedback = new Feedback();
     Rectangle rectangle;
     Rectangle outerBorder;
     StackPane choiceBox;
-    public static Pane pane;
+    public Pane pane;
 
     public  void  start(){
 
@@ -76,17 +78,19 @@ public class BattleScreen {
         Main.window.setScene(scene);
     }
 
-    public static GridPane grid;
+    public GridPane grid;
 
+    ArrayList<DetailsBar>detailsBars = new ArrayList<>();
     CustomAnimation animation = new CustomAnimation();
-    DetailsBar detailsBar = new DetailsBar();
     static HealthBar playerHealthBar;
     static HealthBar enemyHealthBar;
     static Process process = new Process();
-    static PlayerInput playerInput = new PlayerInput(process);
     static EnemyInput enemyInput = new EnemyInput(process);
+    PlayerInput playerInput = new PlayerInput(knight,process,detailsBars);
+
 
      public void startBattle(){
+
          grid = new GridPane();
          playerHealthBar = new HealthBar(300,"Player");
          enemyHealthBar = new HealthBar(300,"Enemy");
@@ -102,34 +106,33 @@ public class BattleScreen {
          Button defenseUp = new Button("Protection of Athena");
          Button block = new Button("Block");
 
-
-         Button[] buttons = {swordAttack,magicAttack,powerUp,defenseUp,block};
+         Button[] buttons ={swordAttack, magicAttack, powerUp, defenseUp, block};
          for(int i=0;i<buttons.length;i++){
              buttons[i].setStyle(constants.kButtonOptions[i]);
              feedback.heptic(buttons[i]);
-             detailsBar.createDetailsBar(buttons[i],knight.optionDetails[i],pane,knight.optionInfo[i],grid);
+             detailsBars.add(new DetailsBar().createDetailsBar(buttons[i], knight.optionDetails[i], pane, knight.optionInfo[i], grid));
          }
 
 
          swordAttack.setOnAction(actionEvent -> {
              enemyInput.optionSelector();
-             playerInput.swordAttack(swordAttack);
+            playerInput.swordAttack();
          });
          magicAttack.setOnAction(actionEvent -> {
              enemyInput.optionSelector();
-             playerInput.magicAttack(magicAttack);
+             playerInput.magicAttack();
          });
          powerUp.setOnAction(actionEvent -> {
              enemyInput.optionSelector();
-             playerInput.buffAttack(powerUp);
+             playerInput.buffAttack();
          });
          defenseUp.setOnAction(actionEvent -> {
              enemyInput.optionSelector();
-             playerInput.buffDefense(defenseUp);
+             playerInput.buffDefense();
          });
          block.setOnAction(actionEvent -> {
              enemyInput.optionSelector();
-             playerInput.block(block);
+             playerInput.block();
          });
 
          grid.setHgap(20);
@@ -144,6 +147,7 @@ public class BattleScreen {
          choiceBox.getChildren().add(grid);
 
     }
+
 
 
 }
