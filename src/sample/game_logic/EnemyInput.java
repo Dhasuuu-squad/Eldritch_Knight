@@ -42,7 +42,7 @@ public class EnemyInput {
                 block();
             else optionSelector();
 
-        }else if (option < 22) {
+        }else {
             if(defBuffLimit>1)
                 buffDefense();
             else optionSelector();
