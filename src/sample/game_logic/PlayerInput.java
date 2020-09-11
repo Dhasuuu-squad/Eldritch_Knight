@@ -1,70 +1,70 @@
 package sample.game_logic;
-import javafx.scene.control.Button;
 import sample.characters.Player;
-import sample.screens.BattleScreen;
 import sample.utility.DetailsBar;
+
+import java.util.ArrayList;
 
 public class PlayerInput{
 
+    Player player;
     Process process;
-    public PlayerInput(Process process){
+    ArrayList<DetailsBar>detailsBars;
+    public PlayerInput(Player player,Process process,ArrayList<DetailsBar>detailsBars){
+        this.player = player;
         this.process = process;
+        this.detailsBars = detailsBars;
     }
 
-    Player player = new Player();
-    DetailsBar detailsBar = new DetailsBar();
-    double swordAttackDamage = 30;
-    double magicAttackDamage = 70;
-    double defBuff = 0;
-    int swordAttackLimit =200;
-    int magicAttackLimit =5;
-    int atkBuffLimit =4;
-    int defBuffLimit =4;
-    int blockLimit = 5;
-
-    public void swordAttack(Button button){
-        if(swordAttackLimit>1){
-            swordAttackLimit--;
-            double damage = swordAttackDamage ;
-            process.playerResponse(Process.Option.SwordAttack,damage,defBuff);
+    public void swordAttack(){
+        if(player.swordAttackLimit>1){
+            player.swordAttackLimit--;
+            double damage = player.swordAttackDamage ;
+            process.playerResponse(Process.Option.SwordAttack,damage,player.defBuff);
+            detailsBars.get(0).message = "Damage: "+player.swordAttackDamage+"\nTurns: "+player.swordAttackLimit;
         }else{
-            detailsBar.createDetailsBar(button,player.optionDetails[0],BattleScreen.pane,"No Turns left",BattleScreen.grid);
+            detailsBars.get(0).message ="No Turns left";
         }
     }
-    public void magicAttack(Button button){
-        if(magicAttackLimit>1){
-            magicAttackLimit--;
-            double damage =  magicAttackDamage;
-            process.playerResponse(Process.Option.MagicAttack,damage,defBuff);
+    public void magicAttack(){
+        if(player.magicAttackLimit>1){
+            player.magicAttackLimit--;
+            double damage =  player.magicAttackDamage;
+            process.playerResponse(Process.Option.MagicAttack,damage,player.defBuff);
+            detailsBars.get(1).message = "Damage: "+player.magicAttackDamage+"\nTurns: "+player.magicAttackLimit;
         }else {
-            detailsBar.createDetailsBar(button,player.optionDetails[1],BattleScreen.pane,"No Turns left",BattleScreen.grid);
+            detailsBars.get(1).message ="No Turns left";
         }
     }
-    public void buffAttack(Button button){
-        if(atkBuffLimit>1){
-            atkBuffLimit--;
-            swordAttackDamage = swordAttackDamage + swordAttackDamage*.20;
-            magicAttackDamage =  magicAttackDamage + magicAttackDamage*.20;
-            process.playerResponse(Process.Option.PowerUP,0,defBuff);
+    public void buffAttack(){
+        if(player.atkBuffLimit>1){
+            player.atkBuffLimit--;
+            player.swordAttackDamage = player.swordAttackDamage + player.swordAttackDamage*.20;
+            player.magicAttackDamage =  player.magicAttackDamage + player.magicAttackDamage*.20;
+            process.playerResponse(Process.Option.PowerUP,0,player.defBuff);
+            detailsBars.get(2).message = "Damage boost: 20%\nTurns: "+player.atkBuffLimit;
+            detailsBars.get(0).message = "Damage: "+player.swordAttackDamage+"\nTurns: "+player.swordAttackLimit;
+            detailsBars.get(1).message = "Damage: "+player.magicAttackDamage+"\nTurns: "+player.magicAttackLimit;
         }else {
-            detailsBar.createDetailsBar(button,player.optionDetails[2],BattleScreen.pane,"No Turns left",BattleScreen.grid);
+            detailsBars.get(2).message ="No Turns left";
         }
     }
-    public void buffDefense(Button button){
-        if(defBuffLimit>1){
-            defBuffLimit--;
-            defBuff+=.15;
-            process.playerResponse(Process.Option.DefenseUP,0,defBuff);
+    public void buffDefense(){
+        if(player.defBuffLimit>1){
+            player.defBuffLimit--;
+            player.defBuff+=.15;
+            process.playerResponse(Process.Option.DefenseUP,0,player.defBuff);
+            detailsBars.get(3).message ="Defence boost: 20%\nTurns: "+player.defBuffLimit;
         }else{
-            detailsBar.createDetailsBar(button,player.optionDetails[3],BattleScreen.pane,"No Turns left",BattleScreen.grid);
+            detailsBars.get(3).message ="No Turns left";
         }
     }
-    public void block(Button button){
-        if(blockLimit>1){
-            blockLimit--;
-            process.playerResponse(Process.Option.Block,0,defBuff);
+    public void block(){
+        if(player.blockLimit>1){
+            player.blockLimit--;
+            process.playerResponse(Process.Option.Block,0,player.defBuff);
+            detailsBars.get(4).message ="Turns: "+player.blockLimit;
         }else{
-            detailsBar.createDetailsBar(button,player.optionDetails[4],BattleScreen.pane,"No Turns left",BattleScreen.grid);
+            detailsBars.get(4).message ="No Turns left";
         }
     }
 
