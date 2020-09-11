@@ -15,7 +15,7 @@ public class Feedback {
         shadow.setOffsetY(7);
         shadow.setRadius(10);
 
-        MediaPlayer hepticSound = new MediaPlayer(new Media("file:///H:/Eldritch_Knight/src/sample/media/clicked.mp3"));
+        MediaPlayer hepticSound = new MediaPlayer(new Media("file:///G:/Eldritch_Knight/src/sample/media/clicked.mp3"));
 
         button.setPrefSize(150,60);
         button.setOnMouseEntered(e->button.setEffect(shadow));
