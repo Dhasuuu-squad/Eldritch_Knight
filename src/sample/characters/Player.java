@@ -3,7 +3,9 @@ package sample.characters;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public class Player {
+
+public class Player{
+
     public  Image pForward = new Image("sample/media/playerForward.png");
     public  Image pBackward = new Image("sample/media/playerBackward.png");
     public  Image pRight = new Image("sample/media/playerRight.png");
@@ -28,15 +30,24 @@ public class Player {
             "Block enemy's any attack"
     } ;
 
+
+
+    public  double swordAttackDamage = 30;
+    public double magicAttackDamage = 70;
+    public double defBuff = 0;
+    public int swordAttackLimit =200;
+    public int magicAttackLimit =5;
+    public int atkBuffLimit =4;
+    public int defBuffLimit =4;
+    public int blockLimit = 5;
+
     public String[] optionInfo = {
-            "Damage: 200",
-            "Damage: 200\nTurns: 5",
-            "Damage boost: 20%\nTurns: 5",
-            "Defence boost: 20%\nTurns: 5",
-            "Turns: 5",
+            "Damage: "+swordAttackDamage+"\nTurns: "+swordAttackLimit,
+            "Damage: "+magicAttackDamage+"\nTurns: "+magicAttackLimit,
+            "Damage boost: 20%\nTurns: "+atkBuffLimit,
+            "Defence boost: 20%\nTurns: "+defBuffLimit,
+            "Turns: "+blockLimit,
     };
-
-
 
 
 }
