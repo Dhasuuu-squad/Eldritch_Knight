@@ -9,9 +9,10 @@ import sample.Constants;
 
 public class DetailsBar{
     Constants constants = new Constants();
-    static Label sideBar; //if it's not static it will only display on the last option. as it gets collected by garbage
+    static Label sideBar; //if it's not static it will only show the last message on every info
+    public String message;
+    public DetailsBar createDetailsBar(Button button, String message1,Pane pane, String message2, GridPane gridPane){
 
-    public void createDetailsBar(Button button, String message1,Pane pane, String message2, GridPane gridPane){
         Label upperBar = new Label();
         upperBar.setPrefSize(780,60);
         upperBar.setAlignment(Pos.CENTER);
@@ -25,11 +26,17 @@ public class DetailsBar{
 
         upperBar.setLayoutX(10);
         upperBar.setLayoutY(535);
+
+        message = message2;
+        button.setOnMouseReleased(event ->sideBar.setText(message));
+        sideBar.setText(message);
         button.setOnMouseEntered(event -> {
-            sideBar.setText(message2);
+            sideBar.setText(message);
+
             upperBar.setText(message1);
             pane.getChildren().add(upperBar);
         });
+
         button.setOnMouseExited(event -> {
             upperBar.setText(null);
             pane.getChildren().remove(upperBar);
@@ -37,7 +44,10 @@ public class DetailsBar{
         });
 
         gridPane.add(sideBar,6,0,1,2);
+        pane.getChildren().remove(upperBar);
 
+
+        return this;
     }
 
 }
