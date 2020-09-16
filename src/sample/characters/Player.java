@@ -18,9 +18,10 @@ public class Player{
     public  Image pForwardRunning1 = new Image("sample/media/playerForwardRunning1.png");
     public  Image pForwardRunning2 = new Image("sample/media/playerForwardRunning2.png");
 
-    public ImageView player = new ImageView();
+    public ImageView playerObject = new ImageView();
 
     public Image knight = new Image("sample/media/player.png");
+    public Image knightDefend = new Image("sample/media/playerBlock.png");
 
     public String[] optionDetails = {
             "Swings the sword with great momentum towards the enemy",
@@ -50,4 +51,10 @@ public class Player{
     };
 
 
+
+
+
 }
+
+
+

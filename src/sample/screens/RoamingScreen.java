@@ -26,17 +26,17 @@ public class RoamingScreen extends Main {
         ImageView opponent = new ImageView(new Image("sample/media/j.png"));
 
 
-        knight.player.setImage(knight.pBackward);
+        knight.playerObject.setImage(knight.pBackward);
         opponent.setX(375);
         opponent.setY(150);
-        knight.player.setX(370);
-        knight.player.setY(685);
+        knight.playerObject.setX(370);
+        knight.playerObject.setY(685);
 
 
         Scene scene = new Scene(stackPane,800,790);
 
         movement = new Movement(scene);
-        pane.getChildren().addAll(opponent,knight.player);
+        pane.getChildren().addAll(opponent,knight.playerObject);
         stackPane.getChildren().addAll(stage, pane);
 
 

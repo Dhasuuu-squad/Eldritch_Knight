@@ -30,11 +30,11 @@ public class Movement extends RoamingScreen {
 
             if(e.getCode()== KeyCode.UP){
                 pCoordinateY = pCoordinateY - 5.0;
-                knight.player.setTranslateY(pCoordinateY);
+                knight.playerObject.setTranslateY(pCoordinateY);
                 if((pCoordinateY *-1)%10==5|| pCoordinateY %10==5){
-                    knight.player.setImage(knight.pForwardRunning1);
+                    knight.playerObject.setImage(knight.pForwardRunning1);
                 }else {
-                    knight.player.setImage(knight.pForwardRunning2);
+                    knight.playerObject.setImage(knight.pForwardRunning2);
                 }
                 if(pCoordinateY <-500){
                     pCoordinateY =-500;
@@ -42,11 +42,11 @@ public class Movement extends RoamingScreen {
             }
             else if(e.getCode() == KeyCode.DOWN){
                 pCoordinateY = pCoordinateY + 5.0;
-                knight.player.setTranslateY(pCoordinateY);
+                knight.playerObject.setTranslateY(pCoordinateY);
                 if(pCoordinateY %10==5|| (pCoordinateY *-1)%10==5){
-                    knight.player.setImage(knight.pBackwardRunning1);
+                    knight.playerObject.setImage(knight.pBackwardRunning1);
                 }else {
-                    knight.player.setImage(knight.pBackwardRunning2);
+                    knight.playerObject.setImage(knight.pBackwardRunning2);
                 }
                 if(pCoordinateY >20){
                     pCoordinateY =20;
@@ -54,17 +54,17 @@ public class Movement extends RoamingScreen {
             }
             else if(e.getCode() == KeyCode.LEFT){
                 pCoordinateX = pCoordinateX - 5.0;
-                knight.player.setTranslateX(pCoordinateX);
+                knight.playerObject.setTranslateX(pCoordinateX);
                 System.out.println(pCoordinateX);
-                knight.player.setImage(knight.pLeftRunning);
+                knight.playerObject.setImage(knight.pLeftRunning);
                 if(pCoordinateX <-100){
                     pCoordinateX = -100;
                 }
             }
             else if(e.getCode() == KeyCode.RIGHT){
                 pCoordinateX = pCoordinateX + 5.0;
-                knight.player.setTranslateX(pCoordinateX);
-                knight.player.setImage(knight.pRightRunning);
+                knight.playerObject.setTranslateX(pCoordinateX);
+                knight.playerObject.setImage(knight.pRightRunning);
                 if(pCoordinateX >110){
                     pCoordinateX = 110;
                 }
@@ -76,16 +76,16 @@ public class Movement extends RoamingScreen {
 
         scene.setOnKeyReleased(e ->{
             if(e.getCode() == KeyCode.RIGHT){
-                knight.player.setImage(knight.pRight);
+                knight.playerObject.setImage(knight.pRight);
             }
             else if(e.getCode() == KeyCode.LEFT){
-                knight.player.setImage(knight.pLeft);
+                knight.playerObject.setImage(knight.pLeft);
             }
             else if(e.getCode() == KeyCode.UP){
-                knight.player.setImage(knight.pForward);
+                knight.playerObject.setImage(knight.pForward);
             }
             else  if(e.getCode() == KeyCode.DOWN){
-                knight.player.setImage(knight.pBackward);
+                knight.playerObject.setImage(knight.pBackward);
             }
         });
     }
