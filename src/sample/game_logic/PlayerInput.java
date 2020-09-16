@@ -1,5 +1,6 @@
 package sample.game_logic;
 import sample.characters.Player;
+import sample.screens.BattleScreen;
 import sample.utility.DetailsBar;
 
 import java.util.ArrayList;
@@ -9,10 +10,12 @@ public class PlayerInput{
     Player player;
     Process process;
     ArrayList<DetailsBar>detailsBars;
-    public PlayerInput(Player player,Process process,ArrayList<DetailsBar>detailsBars){
+    BattleScreen screen;
+    public PlayerInput(Player player, Process process, ArrayList<DetailsBar>detailsBars,BattleScreen screen){
         this.player = player;
         this.process = process;
         this.detailsBars = detailsBars;
+        this.screen= screen;
     }
 
     public void swordAttack(){
@@ -21,6 +24,7 @@ public class PlayerInput{
             double damage = player.swordAttackDamage ;
             process.playerResponse(Process.Option.SwordAttack,damage,player.defBuff);
             detailsBars.get(0).message = "Damage: "+player.swordAttackDamage+"\nTurns: "+player.swordAttackLimit;
+
         }else{
             detailsBars.get(0).message ="No Turns left";
         }
@@ -31,6 +35,7 @@ public class PlayerInput{
             double damage =  player.magicAttackDamage;
             process.playerResponse(Process.Option.MagicAttack,damage,player.defBuff);
             detailsBars.get(1).message = "Damage: "+player.magicAttackDamage+"\nTurns: "+player.magicAttackLimit;
+
         }else {
             detailsBars.get(1).message ="No Turns left";
         }
@@ -60,12 +65,16 @@ public class PlayerInput{
     }
     public void block(){
         if(player.blockLimit>1){
+            screen.hideChoices();
             player.blockLimit--;
-            process.playerResponse(Process.Option.Block,0,player.defBuff);
             detailsBars.get(4).message ="Turns: "+player.blockLimit;
+            process.playerResponse(Process.Option.Block,0,player.defBuff);
         }else{
             detailsBars.get(4).message ="No Turns left";
         }
     }
+
+
+
 
 }
