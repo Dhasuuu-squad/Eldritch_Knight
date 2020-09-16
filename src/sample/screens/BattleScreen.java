@@ -30,28 +30,28 @@ import java.util.ArrayList;
 public class BattleScreen {
 
     public static  Player knight = new Player();
-    Enemy enemy = new Enemy();
+    public static Enemy enemy = new Enemy();
     Constants constants = new Constants();
     Feedback feedback = new Feedback();
     Rectangle rectangle;
     Rectangle outerBorder;
-    StackPane choiceBox;
+    public static StackPane choiceBox = new StackPane();
     public Pane pane;
 
     public  void  start(){
 
         ImageView stage = new ImageView(new Image("sample/media/fightingBackground.jpg"));
 
-        knight.player.setImage(knight.knight);
-        enemy.crusader.setImage(enemy.opponent);
+        knight.playerObject.setImage(knight.knight);
+        enemy.enemyObject.setImage(enemy.opponent);
 
-        knight.player.setX(130);
-        knight.player.setY(250);
+        knight.playerObject.setX(130);
+        knight.playerObject.setY(250);
 
-        enemy.crusader.setY(250);
-        enemy.crusader.setX(300);
+        enemy.enemyObject.setY(250);
+        enemy.enemyObject.setX(300);
 
-        pane = new Pane(enemy.crusader,knight.player);
+        pane = new Pane(enemy.enemyObject,knight.playerObject);
 
         StackPane stack = new StackPane(stage,pane);
 
@@ -67,31 +67,31 @@ public class BattleScreen {
         fight.setStyle(constants.kFightButtonStyle);
         feedback.heptic(fight);
         fight.setOnAction(e -> {
-            choiceBox.getChildren().remove(1);
-            animation.battleReady(knight.player,enemy.crusader,this);
+            choiceBox.getChildren().remove(fight);
+            animation.battleReady(knight.playerObject,enemy.enemyObject,this);
         });
 
-        choiceBox = new StackPane(box,fight);
+        choiceBox.getChildren().addAll(box,fight) ;
         VBox root = new VBox(stack,choiceBox);
 
         Scene scene = new Scene(root,800,790);
         Main.window.setScene(scene);
     }
 
-    public GridPane grid;
+    public  GridPane grid = new GridPane();
 
     ArrayList<DetailsBar>detailsBars = new ArrayList<>();
     CustomAnimation animation = new CustomAnimation();
     static HealthBar playerHealthBar;
     static HealthBar enemyHealthBar;
-    static Process process = new Process();
-    static EnemyInput enemyInput = new EnemyInput(process);
-    PlayerInput playerInput = new PlayerInput(knight,process,detailsBars);
+    Process process = new Process(this);
+    EnemyInput enemyInput = new EnemyInput(process);
+    PlayerInput playerInput = new PlayerInput(knight,process,detailsBars,this);
 
 
      public void startBattle(){
 
-         grid = new GridPane();
+
          playerHealthBar = new HealthBar(300,"Player");
          enemyHealthBar = new HealthBar(300,"Enemy");
          pane.getChildren().addAll(playerHealthBar.createHealthBar(),enemyHealthBar.createHealthBar());
@@ -113,10 +113,11 @@ public class BattleScreen {
              detailsBars.add(new DetailsBar().createDetailsBar(buttons[i], knight.optionDetails[i], pane, knight.optionInfo[i], grid));
          }
 
-
          swordAttack.setOnAction(actionEvent -> {
              enemyInput.optionSelector();
             playerInput.swordAttack();
+
+
          });
          magicAttack.setOnAction(actionEvent -> {
              enemyInput.optionSelector();
@@ -133,6 +134,7 @@ public class BattleScreen {
          block.setOnAction(actionEvent -> {
              enemyInput.optionSelector();
              playerInput.block();
+
          });
 
          grid.setHgap(20);
@@ -144,10 +146,22 @@ public class BattleScreen {
          grid.add(block,5,0,1,2);
          grid.setAlignment(Pos.CENTER);
 
+
          choiceBox.getChildren().add(grid);
+
+
 
     }
 
+    public Rectangle black= new Rectangle(300,192,Color.BLACK);
+
+    public void hideChoices(){
+        grid.getChildren().add(black);
+    }
+
+    public void showChoices(){
+        grid.getChildren().remove(black);
+    }
 
 
 }
