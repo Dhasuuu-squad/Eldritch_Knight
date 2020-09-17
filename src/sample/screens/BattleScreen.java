@@ -150,17 +150,15 @@ public class BattleScreen {
          choiceBox.getChildren().add(grid);
 
 
-
     }
 
-    public Rectangle black= new Rectangle(300,192,Color.BLACK);
 
     public void hideChoices(){
-        grid.getChildren().add(black);
+        grid.setVisible(false);
     }
 
     public void showChoices(){
-        grid.getChildren().remove(black);
+        grid.setVisible(true);
     }
 
 
