@@ -20,6 +20,7 @@ public class PlayerInput{
 
     public void swordAttack(){
         if(player.swordAttackLimit>1){
+            screen.hideChoices();
             player.swordAttackLimit--;
             double damage = player.swordAttackDamage ;
             process.playerResponse(Process.Option.SwordAttack,damage,player.defBuff);
@@ -31,6 +32,7 @@ public class PlayerInput{
     }
     public void magicAttack(){
         if(player.magicAttackLimit>1){
+            screen.hideChoices();
             player.magicAttackLimit--;
             double damage =  player.magicAttackDamage;
             process.playerResponse(Process.Option.MagicAttack,damage,player.defBuff);
@@ -42,6 +44,7 @@ public class PlayerInput{
     }
     public void buffAttack(){
         if(player.atkBuffLimit>1){
+            screen.hideChoices();
             player.atkBuffLimit--;
             player.swordAttackDamage = player.swordAttackDamage + player.swordAttackDamage*.20;
             player.magicAttackDamage =  player.magicAttackDamage + player.magicAttackDamage*.20;
@@ -55,6 +58,7 @@ public class PlayerInput{
     }
     public void buffDefense(){
         if(player.defBuffLimit>1){
+            screen.hideChoices();
             player.defBuffLimit--;
             player.defBuff+=.15;
             process.playerResponse(Process.Option.DefenseUP,0,player.defBuff);
