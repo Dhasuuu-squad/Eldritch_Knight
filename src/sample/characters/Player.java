@@ -18,6 +18,11 @@ public class Player{
     public  Image pForwardRunning1 = new Image("sample/media/playerForwardRunning1.png");
     public  Image pForwardRunning2 = new Image("sample/media/playerForwardRunning2.png");
 
+    public  Image powerUp = new Image("sample/media/atkbuff.png");
+    public  Image defenseUp = new Image("sample/media/defbuff.png");
+
+    public  ImageView buff = new ImageView();
+
     public ImageView playerObject = new ImageView();
 
     public Image knight = new Image("sample/media/player.png");
