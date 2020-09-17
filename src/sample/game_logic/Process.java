@@ -3,6 +3,7 @@ import sample.characters.EnemyAnimation;
 import sample.characters.PlayerAnimation;
 import sample.screens.BattleScreen;
 
+import java.util.Random;
 
 
 public class Process {
@@ -10,6 +11,7 @@ public class Process {
     BattleScreen screen;
     public Process(BattleScreen screen){
         this.screen = screen;
+
     }
 
 
@@ -29,78 +31,111 @@ public class Process {
         playerDamage = damage;
         playerBuff = buff;
 
-        try {
-            battleProcess();
-        }catch (Exception exception){
-            System.out.print(exception.getMessage());
-        }
+
+        battleProcess();
+
     }
 
     public void enemyResponse(Option option,double damage,double buff){
-        enemyOption = option;
+        enemyOption = Option.DefenseUP;
         enemyDamage = damage;
         enemyBuff = buff;
 
     }
-
-    PlayerAnimation playerAnimation = new PlayerAnimation();
     EnemyAnimation enemyAnimation = new EnemyAnimation();
-//    ExecutorService service = Executors.newSingleThreadExecutor();
+    PlayerAnimation playerAnimation = new PlayerAnimation(enemyAnimation);
 
-    void battleProcess() throws InterruptedException {
+    Random random = new Random();
+
+    void battleProcess() {
+
+        int turn = random.nextInt(2);
         if(playerOption==Option.Block){
             if(enemyOption==Option.Block){
-                playerAnimation.selectOption(PlayerAnimation.Options.Block);
-                enemyAnimation.selectOption(EnemyAnimation.Options.Block);
 
-                playerAnimation.block();
-                enemyAnimation.block();
-//                service.execute(playerAnimation);
-//                service.execute(enemyAnimation);
-//
-//                service.shutdown();
+                playerAnimation.selectOption(PlayerAnimation.Options.Block,screen,turn);
+                enemyAnimation.selectOption(EnemyAnimation.Options.Block,screen,playerAnimation,turn);
+
+                if(turn == 0){
+                    playerAnimation.run();
+                }else enemyAnimation.run();
 
 
-//                Thread playerThread = new Thread(playerAnimation);
-//                playerThread.start();
-//                playerThread.join();
-//                playerThread.setDaemon(true);
-
-//
-//                Thread enemyThread = new Thread(enemyAnimation);
-//                enemyThread.start();
-//                enemyThread.join();
-//                enemyThread.setDaemon(true);
-
-                //playerBlock animation
-                //enemyBlock animation
             }else if(enemyOption==Option.PowerUP){
-                //playerBlock animation
-                //enemyPowerUp animation
+
+                playerAnimation.selectOption(PlayerAnimation.Options.Block,screen,turn);
+                enemyAnimation.selectOption(EnemyAnimation.Options.PowerUP,screen,playerAnimation,turn);
+
+                if(turn == 0){
+                    playerAnimation.run();
+                }else enemyAnimation.run();
+
             }else if(enemyOption==Option.DefenseUP){
-                //playerBlock animation
-                //enemyDefenseUp animation
-            }else if(enemyOption==Option.SwordAttack||enemyOption==Option.MagicAttack){
-                //playerBlock animation
-                //enemyMove animation
+
+                playerAnimation.selectOption(PlayerAnimation.Options.Block,screen,turn);
+                enemyAnimation.selectOption(EnemyAnimation.Options.DefenseUP,screen,playerAnimation,turn);
+
+                if(turn == 0){
+                    playerAnimation.run();
+                }else enemyAnimation.run();
+
+            }else if(enemyOption==Option.SwordAttack){
+
+                playerAnimation.selectOption(PlayerAnimation.Options.Block,screen,turn);
+                enemyAnimation.selectOption(EnemyAnimation.Options.SwordAttack,screen,playerAnimation,turn);
+
+                if(turn == 0){
+                    playerAnimation.run();
+                }else enemyAnimation.run();
+
+            }else if(enemyOption==Option.MagicAttack){
+
+                playerAnimation.selectOption(PlayerAnimation.Options.Block,screen,turn);
+                enemyAnimation.selectOption(EnemyAnimation.Options.MagicAttack,screen,playerAnimation,turn);
+
+                if(turn == 0){
+                    playerAnimation.run();
+                }else enemyAnimation.run();
             }
         }else if(enemyOption==Option.Block){
             if(playerOption==Option.PowerUP){
-                //enemyBlock animation
-                //playerPowerUp animation
+
+                enemyAnimation.selectOption(EnemyAnimation.Options.Block,screen,playerAnimation,turn);
+                playerAnimation.selectOption(PlayerAnimation.Options.PowerUP,screen,turn);
+
+                if(turn == 0){
+                    playerAnimation.run();
+                }else enemyAnimation.run();
+
             }else if(playerOption==Option.DefenseUP){
-                //enemyBlock animation
-                //playeDefenseUp animation
-            }else if(playerOption==Option.SwordAttack||playerOption==Option.MagicAttack){
-                //enemyBlock animation
-                //playerMove animation
+
+                enemyAnimation.selectOption(EnemyAnimation.Options.Block,screen,playerAnimation,turn);
+                playerAnimation.selectOption(PlayerAnimation.Options.DefenseUP,screen,turn);
+
+                if(turn == 0){
+                    playerAnimation.run();
+                }else enemyAnimation.run();
+
+            }else if(playerOption==Option.SwordAttack){
+
+                enemyAnimation.selectOption(EnemyAnimation.Options.Block,screen,playerAnimation,turn);
+                playerAnimation.selectOption(PlayerAnimation.Options.SwordAttack,screen,turn);
+
+                if(turn == 0){
+                    playerAnimation.run();
+                }else enemyAnimation.run();
+
+            }else if(playerOption==Option.MagicAttack){
+
+                enemyAnimation.selectOption(EnemyAnimation.Options.Block,screen,playerAnimation,turn);
+                playerAnimation.selectOption(PlayerAnimation.Options.MagicAttack,screen,turn);
+
+                if(turn == 0){
+                    playerAnimation.run();
+                }else enemyAnimation.run();
+
             }
         }
-
-//        choiceBox.setVisible(true);
-
-        screen.showChoices();
-
 
         
     }
