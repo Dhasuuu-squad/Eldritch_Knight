@@ -43,7 +43,7 @@ public class Process {
 
     }
     EnemyAnimation enemyAnimation = new EnemyAnimation();
-    PlayerAnimation playerAnimation = new PlayerAnimation(enemyAnimation);
+    PlayerAnimation playerAnimation = new PlayerAnimation();
 
     Random random = new Random();
 
@@ -51,93 +51,41 @@ public class Process {
 
         int turn = random.nextInt(2);
         if(playerOption==Option.Block){
-            if(enemyOption==Option.Block){
-
-                playerAnimation.selectOption(PlayerAnimation.Options.Block,screen,turn);
-                enemyAnimation.selectOption(EnemyAnimation.Options.Block,screen,playerAnimation,turn);
-
-                if(turn == 0){
-                    playerAnimation.run();
-                }else enemyAnimation.run();
-
-
-            }else if(enemyOption==Option.PowerUP){
-
-                playerAnimation.selectOption(PlayerAnimation.Options.Block,screen,turn);
-                enemyAnimation.selectOption(EnemyAnimation.Options.PowerUP,screen,playerAnimation,turn);
-
-                if(turn == 0){
-                    playerAnimation.run();
-                }else enemyAnimation.run();
-
-            }else if(enemyOption==Option.DefenseUP){
-
-                playerAnimation.selectOption(PlayerAnimation.Options.Block,screen,turn);
-                enemyAnimation.selectOption(EnemyAnimation.Options.DefenseUP,screen,playerAnimation,turn);
-
-                if(turn == 0){
-                    playerAnimation.run();
-                }else enemyAnimation.run();
-
-            }else if(enemyOption==Option.SwordAttack){
-
-                playerAnimation.selectOption(PlayerAnimation.Options.Block,screen,turn);
-                enemyAnimation.selectOption(EnemyAnimation.Options.SwordAttack,screen,playerAnimation,turn);
-
-                if(turn == 0){
-                    playerAnimation.run();
-                }else enemyAnimation.run();
-
-            }else if(enemyOption==Option.MagicAttack){
-
-                playerAnimation.selectOption(PlayerAnimation.Options.Block,screen,turn);
-                enemyAnimation.selectOption(EnemyAnimation.Options.MagicAttack,screen,playerAnimation,turn);
-
-                if(turn == 0){
-                    playerAnimation.run();
-                }else enemyAnimation.run();
-            }
-        }else if(enemyOption==Option.Block){
-            if(playerOption==Option.PowerUP){
-
-                enemyAnimation.selectOption(EnemyAnimation.Options.Block,screen,playerAnimation,turn);
-                playerAnimation.selectOption(PlayerAnimation.Options.PowerUP,screen,turn);
-
-                if(turn == 0){
-                    playerAnimation.run();
-                }else enemyAnimation.run();
-
-            }else if(playerOption==Option.DefenseUP){
-
-                enemyAnimation.selectOption(EnemyAnimation.Options.Block,screen,playerAnimation,turn);
-                playerAnimation.selectOption(PlayerAnimation.Options.DefenseUP,screen,turn);
-
-                if(turn == 0){
-                    playerAnimation.run();
-                }else enemyAnimation.run();
-
-            }else if(playerOption==Option.SwordAttack){
-
-                enemyAnimation.selectOption(EnemyAnimation.Options.Block,screen,playerAnimation,turn);
-                playerAnimation.selectOption(PlayerAnimation.Options.SwordAttack,screen,turn);
-
-                if(turn == 0){
-                    playerAnimation.run();
-                }else enemyAnimation.run();
-
-            }else if(playerOption==Option.MagicAttack){
-
-                enemyAnimation.selectOption(EnemyAnimation.Options.Block,screen,playerAnimation,turn);
-                playerAnimation.selectOption(PlayerAnimation.Options.MagicAttack,screen,turn);
-
-                if(turn == 0){
-                    playerAnimation.run();
-                }else enemyAnimation.run();
-
-            }
+            playerAnimation.selectOption(PlayerAnimation.Options.Block,screen,enemyAnimation,turn);
+        }else if(playerOption==Option.SwordAttack){
+            playerAnimation.selectOption(PlayerAnimation.Options.SwordAttack,screen,enemyAnimation,turn);
+        }else if(playerOption==Option.MagicAttack){
+            playerAnimation.selectOption(PlayerAnimation.Options.MagicAttack,screen,enemyAnimation,turn);
+        }else if(playerOption==Option.PowerUP){
+            playerAnimation.selectOption(PlayerAnimation.Options.PowerUP,screen,enemyAnimation,turn);
+        }else if(playerOption==Option.DefenseUP){
+            playerAnimation.selectOption(PlayerAnimation.Options.DefenseUP,screen,enemyAnimation,turn);
         }
 
-        
+        if(enemyOption==Option.Block){
+            enemyAnimation.selectOption(EnemyAnimation.Options.Block,screen,playerAnimation,turn);
+        }else if(enemyOption==Option.SwordAttack){
+            enemyAnimation.selectOption(EnemyAnimation.Options.SwordAttack,screen,playerAnimation,turn);
+        }else if(enemyOption==Option.MagicAttack){
+            enemyAnimation.selectOption(EnemyAnimation.Options.MagicAttack,screen,playerAnimation,turn);
+        }else if(enemyOption==Option.PowerUP){
+            enemyAnimation.selectOption(EnemyAnimation.Options.PowerUP,screen,playerAnimation,turn);
+        }else if(enemyOption==Option.DefenseUP){
+            enemyAnimation.selectOption(EnemyAnimation.Options.DefenseUP,screen,playerAnimation,turn);
+        }
+
+        if(playerOption==Option.Block && (enemyOption==Option.SwordAttack||enemyOption==Option.MagicAttack)){
+
+        }else if (enemyOption==Option.Block && (playerOption==Option.SwordAttack||playerOption==Option.MagicAttack)){
+
+        }else{
+            if(turn == 0){
+                playerAnimation.run();
+            }else enemyAnimation.run();
+
+        }
     }
 
+        
 }
+
