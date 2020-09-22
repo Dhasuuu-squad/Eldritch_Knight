@@ -28,9 +28,6 @@ public class EnemyAnimation{
             this.playerAnimation = playerAnimation;
             this.turn = turn;
 
-            if(this.screen == null){
-                System.out.println("yes");
-            }
     }
 
     public void run(){
@@ -120,8 +117,8 @@ public class EnemyAnimation{
         enemy.buff.setImage(buff);
         enemy.buff.setX(600);
         enemy.buff.setY(300);
-        screen.pane.getChildren().add(enemy.buff);
 
+        screen.pane.getChildren().add(enemy.buff);
         glow.setLevel(.8);
 
         transition.setNode(enemy.buff);
