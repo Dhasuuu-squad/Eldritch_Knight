@@ -6,6 +6,8 @@ import javafx.scene.image.ImageView;
 
 public class Player{
 
+    public double coordinateX = 130;
+    public double coordinateY = 250;
     public  Image pForward = new Image("sample/media/playerForward.png");
     public  Image pBackward = new Image("sample/media/playerBackward.png");
     public  Image pRight = new Image("sample/media/playerRight.png");
@@ -25,8 +27,14 @@ public class Player{
 
     public ImageView playerObject = new ImageView();
 
+    public ImageView magicDagger = new ImageView(new Image("sample/media/playerMagic.png"));
+
     public Image knight = new Image("sample/media/player.png");
     public Image knightDefend = new Image("sample/media/playerBlock.png");
+    public Image attackStance = new Image("sample/media/playerA1.png");
+    public Image swordAttack = new Image("sample/media/playerA2.png");
+    public Image magicStance = new Image("sample/media/playerM1.png");
+    public Image freeHand = new Image("sample/media/playerM2.png");
 
     public String[] optionDetails = {
             "Swings the sword with great momentum towards the enemy",
