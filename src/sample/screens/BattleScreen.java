@@ -45,8 +45,8 @@ public class BattleScreen {
         knight.playerObject.setImage(knight.knight);
         enemy.enemyObject.setImage(enemy.opponent);
 
-        knight.playerObject.setX(130);
-        knight.playerObject.setY(250);
+        knight.playerObject.setX(knight.coordinateX);
+        knight.playerObject.setY(knight.coordinateY);
 
         enemy.enemyObject.setY(250);
         enemy.enemyObject.setX(300);
