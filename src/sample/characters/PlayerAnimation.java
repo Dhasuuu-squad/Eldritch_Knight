@@ -52,29 +52,30 @@ public class PlayerAnimation{
     TranslateTransition transition = new TranslateTransition(Duration.seconds(1));
     RotateTransition rotateTransition = new RotateTransition(Duration.seconds(1));
 
-    TranslateTransition enemyHurt = new TranslateTransition(Duration.seconds(.8),enemy.enemyObject);
+
 
     void swordAttack(){
-        PauseTransition pauseTransition = new PauseTransition(Duration.seconds(1));
-
+        PauseTransition pauseTransition = new PauseTransition(Duration.seconds(0.7));
+        TranslateTransition enemyHurt = new TranslateTransition(Duration.seconds(1),enemy.enemyObject);
         TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(1.5),player.playerObject);
         translateTransition.setToX(200);
 
         TranslateTransition transitionReverse = new TranslateTransition(Duration.seconds(1),player.playerObject);
         transitionReverse.setToX(-170);
 
-        setEnemyHurtAnimation();
+        ParallelTransition attackAnimation = new ParallelTransition(player.playerObject,pauseTransition,enemyHurt);
+
+        setEnemyHurtAnimation(enemyHurt);
 
         translateTransition.play();
         player.playerObject.setImage(player.attackStance);
         translateTransition.setOnFinished(actionEvent -> {
             player.playerObject.setImage(player.swordAttack);
-            pauseTransition.play();
-            enemyHurt.play();
+            attackAnimation.play();
             enemy.enemyObject.setEffect(hurt);
-            pauseTransition.setOnFinished(actionEvent1 -> {
+            pauseTransition.setOnFinished(actionEvent1 -> player.playerObject.setImage(player.attackStance));
+            attackAnimation.setOnFinished(actionEvent1 -> {
                 enemy.enemyObject.setEffect(null);
-                player.playerObject.setImage(player.attackStance);
                 transitionReverse.play();
                 transitionReverse.setOnFinished(actionEvent2 -> {
                     player.playerObject.setImage(player.knight);
@@ -89,6 +90,7 @@ public class PlayerAnimation{
     }
 
     void magicAttack(){
+        TranslateTransition enemyHurt = new TranslateTransition(Duration.seconds(1),enemy.enemyObject);
         PauseTransition pauseTransition = new PauseTransition(Duration.seconds(1));
         player.playerObject.setImage(player.magicStance);
         player.playerObject.setX(220);
@@ -104,7 +106,7 @@ public class PlayerAnimation{
 
         ParallelTransition daggerAnimation = new ParallelTransition(player.magicDagger,daggerMovement,daggerRotation);
 
-        setEnemyHurtAnimation();
+        setEnemyHurtAnimation(enemyHurt);
         pauseTransition.play();
 
         pauseTransition.setOnFinished(actionEvent -> {
@@ -212,7 +214,7 @@ public class PlayerAnimation{
 
     }
 
-    void setEnemyHurtAnimation(){
+    void setEnemyHurtAnimation(TranslateTransition enemyHurt){
         enemyHurt.setToY(5);
         enemyHurt.setByX(30);
         enemyHurt.setAutoReverse(true);
