@@ -15,5 +15,13 @@ public class Enemy {
 
     public ImageView enemyObject = new ImageView();
 
+    public Image attackStance = new Image("sample/media/opponentA1.png");
+    public Image swordAttack = new Image("sample/media/opponentA2.png");
+    public Image swordRetrieve = new Image("sample/media/m.png");
+
+    public ImageView magicAttack = new ImageView(new Image("sample/media/opponentMagic.png"));
+    public Image magicStance = new Image("sample/media/opponentM1.png");
+    public Image magicSword = new Image("sample/media/opponentM2.png");
+
 
 }
