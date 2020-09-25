@@ -56,7 +56,7 @@ public class PlayerAnimation{
 
     void swordAttack(){
         PauseTransition pauseTransition = new PauseTransition(Duration.seconds(0.7));
-        TranslateTransition enemyHurt = new TranslateTransition(Duration.seconds(1),enemy.enemyObject);
+        TranslateTransition enemyHurt = new TranslateTransition(Duration.seconds(0.7),enemy.enemyObject);
         TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(1.5),player.playerObject);
         translateTransition.setToX(200);
 
@@ -73,9 +73,9 @@ public class PlayerAnimation{
             player.playerObject.setImage(player.swordAttack);
             attackAnimation.play();
             enemy.enemyObject.setEffect(hurt);
-            pauseTransition.setOnFinished(actionEvent1 -> player.playerObject.setImage(player.attackStance));
-            attackAnimation.setOnFinished(actionEvent1 -> {
-                enemy.enemyObject.setEffect(null);
+            enemyHurt.setOnFinished(actionEvent1 -> enemy.enemyObject.setEffect(null));
+            pauseTransition.setOnFinished(actionEvent1 -> {
+                player.playerObject.setImage(player.attackStance);
                 transitionReverse.play();
                 transitionReverse.setOnFinished(actionEvent2 -> {
                     player.playerObject.setImage(player.knight);
