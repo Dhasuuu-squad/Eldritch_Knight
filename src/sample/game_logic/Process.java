@@ -37,7 +37,7 @@ public class Process {
     }
 
     public void enemyResponse(Option option,double damage,double buff){
-        enemyOption = Option.DefenseUP;
+        enemyOption = option;
         enemyDamage = damage;
         enemyBuff = buff;
 
