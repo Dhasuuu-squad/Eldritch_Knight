@@ -7,11 +7,12 @@ import javafx.animation.TranslateTransition;
 import javafx.scene.effect.Glow;
 import javafx.scene.effect.SepiaTone;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.transform.Rotate;
-import javafx.scene.transform.Translate;
 import javafx.util.Duration;
 import sample.screens.BattleScreen;
+import sample.utility.CustomAnimation;
+import sample.utility.DetailsBar;
 
 
 public class EnemyAnimation{
@@ -33,18 +34,68 @@ public class EnemyAnimation{
             this.turn = turn;
 
     }
-
+    DetailsBar detailsBar =new DetailsBar();
+    CustomAnimation animation = new CustomAnimation();
     public void run(){
         if(option== Options.SwordAttack){
-            swordAttack();
+            detailsBar.setOptionDetails(1);
+            BattleScreen.choiceBox.getChildren().add(detailsBar.text);
+            animation.typewriterAnimation("Enemy"+detailsBar.swordAttack,detailsBar.text);
+            screen.scene.setOnKeyPressed(keyEvent -> {
+                if(keyEvent.getCode() == KeyCode.ENTER){
+                    BattleScreen.choiceBox.getChildren().remove(detailsBar.text);
+                    detailsBar.text.setText(null);
+                    swordAttack();
+                }
+            });
+
         }else if(option== Options.MagicAttack){
-            magicAttack();
+            detailsBar.setOptionDetails(1);
+            BattleScreen.choiceBox.getChildren().add(detailsBar.text);
+            animation.typewriterAnimation("Enemy"+detailsBar.magicAttack,detailsBar.text);
+            screen.scene.setOnKeyPressed(keyEvent -> {
+                if(keyEvent.getCode() == KeyCode.ENTER){
+                    BattleScreen.choiceBox.getChildren().remove(detailsBar.text);
+                    detailsBar.text.setText(null);
+                    magicAttack();
+                }
+            });
+
         }else if(option== Options.PowerUP){
-            powerUp();
+            detailsBar.setOptionDetails(1);
+            BattleScreen.choiceBox.getChildren().add(detailsBar.text);
+            animation.typewriterAnimation("Enemy"+detailsBar.powerUp,detailsBar.text);
+            screen.scene.setOnKeyPressed(keyEvent -> {
+                if(keyEvent.getCode() == KeyCode.ENTER){
+                    BattleScreen.choiceBox.getChildren().remove(detailsBar.text);
+                    detailsBar.text.setText(null);
+                    powerUp();
+                }
+            });
+
         }else if(option== Options.DefenseUP){
-            defenseUp();
+            detailsBar.setOptionDetails(1);
+            BattleScreen.choiceBox.getChildren().add(detailsBar.text);
+            animation.typewriterAnimation("Enemy"+detailsBar.defenseUp,detailsBar.text);
+            screen.scene.setOnKeyPressed(keyEvent -> {
+                if(keyEvent.getCode() == KeyCode.ENTER){
+                    BattleScreen.choiceBox.getChildren().remove(detailsBar.text);
+                    detailsBar.text.setText(null);
+                    defenseUp();
+                }
+            });
+
         }else{
-            block();
+            detailsBar.setOptionDetails(1);
+            BattleScreen.choiceBox.getChildren().add(detailsBar.text);
+            animation.typewriterAnimation("Enemy"+detailsBar.block,detailsBar.text);
+            screen.scene.setOnKeyPressed(keyEvent -> {
+                if(keyEvent.getCode() == KeyCode.ENTER){
+                    BattleScreen.choiceBox.getChildren().remove(detailsBar.text);
+                    detailsBar.text.setText(null);
+                    block();
+                }
+            });
         }
     }
 

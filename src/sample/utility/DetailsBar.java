@@ -5,6 +5,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.*;
 import sample.Constants;
 
 public class DetailsBar{
@@ -48,6 +50,25 @@ public class DetailsBar{
 
 
         return this;
+    }
+
+    public String swordAttack = " is using SWORDATTACK!!...";
+    public String magicAttack = " is using MAGICATTACK!!...";
+    public String powerUp = " is using POWER OF HERCULES!\nYour strength will increase...";
+    public String defenseUp = " is using PROTECTION OF ATHENA!\nYour defense will increase...";
+    public String block = " is using BLOCK!!...";
+    public String blocked = " blocked Opponent's attack...";
+
+    public Text text = new Text();
+
+    public void setOptionDetails(int num){
+        if(num == 0){
+            text.setFill(Color.LAWNGREEN);
+        }else text.setFill(Color.RED);
+
+        text.setFont(Font.font(Font.getFamilies().get(22), FontWeight.BOLD, FontPosture.REGULAR, 20)); //0 10 8 11 15 16 19 20 21
+        text.setTextAlignment(TextAlignment.CENTER);
+
     }
 
 }

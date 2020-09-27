@@ -37,8 +37,10 @@ public class BattleScreen {
     Rectangle outerBorder;
     public static StackPane choiceBox = new StackPane();
     public Pane pane;
+    public Scene scene;
 
     public  void  start(){
+
 
         ImageView stage = new ImageView(new Image("sample/media/fightingBackground.jpg"));
 
@@ -74,7 +76,7 @@ public class BattleScreen {
         choiceBox.getChildren().addAll(box,fight) ;
         VBox root = new VBox(stack,choiceBox);
 
-        Scene scene = new Scene(root,800,790);
+        scene = new Scene(root,800,790);
         Main.window.setScene(scene);
     }
 
