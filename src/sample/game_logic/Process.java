@@ -75,9 +75,9 @@ public class Process {
         }
 
         if(playerOption==Option.Block && (enemyOption==Option.SwordAttack||enemyOption==Option.MagicAttack)){
-
+            playerAnimation.block(true);
         }else if (enemyOption==Option.Block && (playerOption==Option.SwordAttack||playerOption==Option.MagicAttack)){
-
+            enemyAnimation.block(true);
         }else{
             if(turn == 0){
                 playerAnimation.run();
