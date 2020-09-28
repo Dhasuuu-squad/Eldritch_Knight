@@ -70,7 +70,7 @@ public class CustomAnimation {
         fadeTransition.play();
 
         fadeTransition.setOnFinished(e->{
-            bgm = new MediaPlayer(new Media("file:///H:/Eldritch_Knight/src/sample/media/backgroundMusic.mp3"));
+            bgm = new MediaPlayer(new Media("file:///G:/Eldritch_Knight/src/sample/media/backgroundMusic.mp3"));
             bgm.play();
             bgm.setCycleCount(MediaPlayer.INDEFINITE);
             bgm.setAutoPlay(true);
