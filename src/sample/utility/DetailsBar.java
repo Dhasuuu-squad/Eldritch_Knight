@@ -54,15 +54,17 @@ public class DetailsBar{
 
     public String swordAttack = " is using SWORDATTACK!!...";
     public String magicAttack = " is using MAGICATTACK!!...";
-    public String powerUp = " is using POWER OF HERCULES!\nYour strength will increase...";
-    public String defenseUp = " is using PROTECTION OF ATHENA!\nYour defense will increase...";
+    public String powerUp = " is using POWER OF HERCULES!\n strength will increase...";
+    public String defenseUp = " is using PROTECTION OF ATHENA!\n defense will increase...";
     public String block = " is using BLOCK!!...";
-    public String blocked = " blocked Opponent's attack...";
+    public String blocked = " has blocked Opponent's attack...";
 
     public Text text = new Text();
-
-    public void setOptionDetails(int num){
-        if(num == 0){
+    public enum Person{
+        Player,Enemy
+    }
+    public void setOptionDetails(Person person){
+        if(person == Person.Player){
             text.setFill(Color.LAWNGREEN);
         }else text.setFill(Color.RED);
 
