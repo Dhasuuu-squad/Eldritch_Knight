@@ -2,6 +2,8 @@ package sample.characters;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 
 public class Player{
@@ -36,6 +38,13 @@ public class Player{
     public Image magicStance = new Image("sample/media/playerM1.png");
     public Image freeHand = new Image("sample/media/playerM2.png");
 
+    public MediaPlayer hurt = new MediaPlayer(new Media("file:///G:/Eldritch_Knight/src/sample/media/playerHurt.mp3"));
+    public MediaPlayer sword = new MediaPlayer(new Media("file:///G:/Eldritch_Knight/src/sample/media/sword.mp3"));
+    public MediaPlayer magic = new MediaPlayer(new Media("file:///G:/Eldritch_Knight/src/sample/media/playerMagic.mp3"));
+    public MediaPlayer hercules = new MediaPlayer(new Media("file:///G:/Eldritch_Knight/src/sample/media/powerUp.mp3"));
+    public MediaPlayer athena = new MediaPlayer(new Media("file:///G:/Eldritch_Knight/src/sample/media/defenseUp.mp3"));
+    public MediaPlayer block = new MediaPlayer(new Media("file:///G:/Eldritch_Knight/src/sample/media/shield.mp3"));
+
     public String[] optionDetails = {
             "Swings the sword with great momentum towards the enemy",
             "Uses magical daggers and throw them at the enemy",
@@ -62,6 +71,7 @@ public class Player{
             "Defence boost: 20%\nTurns: "+defBuffLimit,
             "Turns: "+blockLimit,
     };
+
 
 
 
