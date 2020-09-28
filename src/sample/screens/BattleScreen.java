@@ -84,8 +84,8 @@ public class BattleScreen {
 
     ArrayList<DetailsBar>detailsBars = new ArrayList<>();
     CustomAnimation animation = new CustomAnimation();
-    static HealthBar playerHealthBar;
-    static HealthBar enemyHealthBar;
+    public  HealthBar playerHealthBar;
+    public  HealthBar enemyHealthBar;
     Process process = new Process(this);
     EnemyInput enemyInput = new EnemyInput(process);
     PlayerInput playerInput = new PlayerInput(knight,process,detailsBars,this);
