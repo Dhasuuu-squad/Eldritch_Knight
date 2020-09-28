@@ -2,6 +2,8 @@ package sample.characters;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 
 public class Enemy {
@@ -22,6 +24,13 @@ public class Enemy {
     public ImageView magicAttack = new ImageView(new Image("sample/media/opponentMagic.png"));
     public Image magicStance = new Image("sample/media/opponentM1.png");
     public Image magicSword = new Image("sample/media/opponentM2.png");
+
+    public MediaPlayer hurt = new MediaPlayer(new Media("file:///G:/Eldritch_Knight/src/sample/media/enemyHurt.mp3"));
+    public MediaPlayer sword = new MediaPlayer(new Media("file:///G:/Eldritch_Knight/src/sample/media/sword.mp3"));
+    public MediaPlayer magic = new MediaPlayer(new Media("file:///G:/Eldritch_Knight/src/sample/media/enemyMagic.mp3"));
+    public MediaPlayer hercules = new MediaPlayer(new Media("file:///G:/Eldritch_Knight/src/sample/media/powerUp.mp3"));
+    public MediaPlayer athena = new MediaPlayer(new Media("file:///G:/Eldritch_Knight/src/sample/media/defenseUp.mp3"));
+    public MediaPlayer block = new MediaPlayer(new Media("file:///G:/Eldritch_Knight/src/sample/media/shield.mp3"));
 
 
 }
