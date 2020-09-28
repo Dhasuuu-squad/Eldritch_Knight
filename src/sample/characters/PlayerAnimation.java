@@ -14,6 +14,7 @@ import javafx.util.Duration;
 import sample.screens.BattleScreen;
 import sample.utility.CustomAnimation;
 import sample.utility.DetailsBar;
+import sample.utility.HealthBar;
 
 public class PlayerAnimation{
 
@@ -40,11 +41,12 @@ public class PlayerAnimation{
     CustomAnimation animation = new CustomAnimation();
     public void run(){
         if(option==Options.SwordAttack){
-            detailsBar.setOptionDetails(0);
+            detailsBar.setOptionDetails(DetailsBar.Person.Player);
             BattleScreen.choiceBox.getChildren().add(detailsBar.text);
             animation.typewriterAnimation("Player"+detailsBar.swordAttack,detailsBar.text);
             screen.scene.setOnKeyPressed(keyEvent -> {
-                if(keyEvent.getCode() == KeyCode.ENTER){
+                if(keyEvent.getCode() == KeyCode.ENTER ){
+                    screen.scene.setOnKeyPressed(null);
                     BattleScreen.choiceBox.getChildren().remove(detailsBar.text);
                     detailsBar.text.setText(null);
                     swordAttack();
@@ -53,11 +55,12 @@ public class PlayerAnimation{
 
 
         }else if(option==Options.MagicAttack){
-            detailsBar.setOptionDetails(0);
+            detailsBar.setOptionDetails(DetailsBar.Person.Player);
             BattleScreen.choiceBox.getChildren().add(detailsBar.text);
             animation.typewriterAnimation("Player"+detailsBar.magicAttack,detailsBar.text);
             screen.scene.setOnKeyPressed(keyEvent -> {
                 if(keyEvent.getCode() == KeyCode.ENTER){
+                    screen.scene.setOnKeyPressed(null);
                     BattleScreen.choiceBox.getChildren().remove(detailsBar.text);
                     detailsBar.text.setText(null);
                     magicAttack();
@@ -65,11 +68,12 @@ public class PlayerAnimation{
             });
 
         }else if(option==Options.PowerUP){
-            detailsBar.setOptionDetails(0);
+            detailsBar.setOptionDetails(DetailsBar.Person.Player);
             BattleScreen.choiceBox.getChildren().add(detailsBar.text);
             animation.typewriterAnimation("Player"+detailsBar.powerUp,detailsBar.text);
             screen.scene.setOnKeyPressed(keyEvent -> {
                 if(keyEvent.getCode() == KeyCode.ENTER){
+                    screen.scene.setOnKeyPressed(null);
                     BattleScreen.choiceBox.getChildren().remove(detailsBar.text);
                     detailsBar.text.setText(null);
                     powerUp();
@@ -77,11 +81,12 @@ public class PlayerAnimation{
             });
 
         }else if(option==Options.DefenseUP){
-            detailsBar.setOptionDetails(0);
+            detailsBar.setOptionDetails(DetailsBar.Person.Player);
             BattleScreen.choiceBox.getChildren().add(detailsBar.text);
             animation.typewriterAnimation("Player"+detailsBar.defenseUp,detailsBar.text);
             screen.scene.setOnKeyPressed(keyEvent -> {
                 if(keyEvent.getCode() == KeyCode.ENTER){
+                    screen.scene.setOnKeyPressed(null);
                     BattleScreen.choiceBox.getChildren().remove(detailsBar.text);
                     detailsBar.text.setText(null);
                     defenseUp();
@@ -89,14 +94,15 @@ public class PlayerAnimation{
             });
 
         }else{
-            detailsBar.setOptionDetails(0);
+            detailsBar.setOptionDetails(DetailsBar.Person.Player);
             BattleScreen.choiceBox.getChildren().add(detailsBar.text);
             animation.typewriterAnimation("Player"+detailsBar.block,detailsBar.text);
             screen.scene.setOnKeyPressed(keyEvent -> {
                 if(keyEvent.getCode() == KeyCode.ENTER){
+                    screen.scene.setOnKeyPressed(null);
                     BattleScreen.choiceBox.getChildren().remove(detailsBar.text);
                     detailsBar.text.setText(null);
-                    block();
+                    block(false);
                 }
             });
         }
@@ -127,6 +133,11 @@ public class PlayerAnimation{
         translateTransition.setOnFinished(actionEvent -> {
             player.playerObject.setImage(player.swordAttack);
             attackAnimation.play();
+            player.sword.stop();
+            player.sword.play();
+            enemy.hurt.stop();
+            enemy.hurt.play();
+            screen.enemyHealthBar.setDamage(30, HealthBar.Damage.Enemy);
             enemy.enemyObject.setEffect(hurt);
             enemyHurt.setOnFinished(actionEvent1 -> enemy.enemyObject.setEffect(null));
             pauseTransition.setOnFinished(actionEvent1 -> {
@@ -167,11 +178,17 @@ public class PlayerAnimation{
         pauseTransition.setOnFinished(actionEvent -> {
             screen.pane.getChildren().add(player.magicDagger);
             daggerAnimation.play();
+            player.magic.stop();
+            player.magic.play();
             player.playerObject.setImage(player.freeHand);
 
             daggerAnimation.setOnFinished(actionEvent1 -> {
                 enemy.enemyObject.setEffect(hurt);
                 enemyHurt.play();
+
+                enemy.hurt.stop();
+                enemy.hurt.play();
+                screen.enemyHealthBar.setDamage(60, HealthBar.Damage.Enemy);
                 player.playerObject.setImage(player.knight);
                 player.magicDagger.setTranslateX(-20);
                 screen.pane.getChildren().remove(player.magicDagger);
@@ -196,6 +213,8 @@ public class PlayerAnimation{
 
 
         parallelTransition.play();
+        player.hercules.stop();
+        player.hercules.play();
         player.playerObject.setEffect(glow);
         parallelTransition.setOnFinished(actionEvent -> {
             screen.pane.getChildren().remove(player.buff);
@@ -215,6 +234,8 @@ public class PlayerAnimation{
 
 
         parallelTransition.play();
+        player.athena.stop();
+        player.athena.play();
         player.playerObject.setEffect(glow);
         parallelTransition.setOnFinished(actionEvent -> {
             screen.pane.getChildren().remove(player.buff);
@@ -226,7 +247,7 @@ public class PlayerAnimation{
 
     }
 
-    void block(){
+    public void block(boolean flag){
 
         TranslateTransition blockDefend = new TranslateTransition();
         blockDefend.setDuration(Duration.seconds(1.5));
@@ -235,12 +256,28 @@ public class PlayerAnimation{
         player.playerObject.setTranslateY(-20);
         player.playerObject.setImage(player.knightDefend);
         blockDefend.play();
+        player.block.stop();
+        player.block.play();
         blockDefend.setOnFinished(actionEvent -> {
             player.playerObject.setTranslateY(6);
             player.playerObject.setImage(player.knight);
-            if(turn==0) {
-                enemyAnimation.run();
-            }else screen.showChoices();
+            if(flag){
+                detailsBar.setOptionDetails(DetailsBar.Person.Player);
+                BattleScreen.choiceBox.getChildren().add(detailsBar.text);
+                animation.typewriterAnimation("Player"+detailsBar.blocked,detailsBar.text);
+                screen.scene.setOnKeyPressed(keyEvent -> {
+                    if(keyEvent.getCode() == KeyCode.ENTER){
+                        screen.scene.setOnKeyPressed(null);
+                        BattleScreen.choiceBox.getChildren().remove(detailsBar.text);
+                        detailsBar.text.setText(null);
+                        screen.showChoices();
+                    }
+                });
+            }else{
+                if(turn==0) {
+                    enemyAnimation.run();
+                }else screen.showChoices();
+            }
         });
 
 
