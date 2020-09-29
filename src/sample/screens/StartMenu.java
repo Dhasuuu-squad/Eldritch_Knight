@@ -9,11 +9,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import sample.Constants;
+import sample.Main;
 import sample.utility.Feedback;
 
 
 
-public class StartMenu {
+public class StartMenu extends Main{
     static Constants styling = new Constants();
     static Feedback feedback = new Feedback();
 
@@ -29,9 +30,9 @@ public class StartMenu {
 
         start.setStyle(styling.kStartButtonStyle);
         exit.setStyle(styling.kExitButtonStyle);
-//        RoamingScreen.start()
-        BattleScreen screen = new BattleScreen();
-        start.setOnAction(e ->screen.start());
+        start.setOnAction(e ->RoamingScreen.start());
+
+        exit.setOnAction(actionEvent -> exitScreen());
 
 
 
@@ -44,5 +45,11 @@ public class StartMenu {
 
         return new Scene(stack,800,790);
 
+    }
+
+    static void exitScreen() {
+        if (ConfirmBox.display()) {
+            window.close();
+        }
     }
 }
