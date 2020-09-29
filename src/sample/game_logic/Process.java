@@ -15,10 +15,10 @@ public class Process {
     }
 
 
-    double playerDamage;
-    double enemyDamage;
-    double playerBuff;
-    double enemyBuff;
+    public double playerDamage;
+    public double enemyDamage;
+    public double playerBuff;
+    public double enemyBuff;
     Option playerOption;
     Option enemyOption;
 
@@ -51,27 +51,27 @@ public class Process {
 
         int turn = random.nextInt(2);
         if(playerOption==Option.Block){
-            playerAnimation.selectOption(PlayerAnimation.Options.Block,screen,enemyAnimation,turn);
+            playerAnimation.selectOption(PlayerAnimation.Options.Block,screen,enemyAnimation,turn,this);
         }else if(playerOption==Option.SwordAttack){
-            playerAnimation.selectOption(PlayerAnimation.Options.SwordAttack,screen,enemyAnimation,turn);
+            playerAnimation.selectOption(PlayerAnimation.Options.SwordAttack,screen,enemyAnimation,turn,this);
         }else if(playerOption==Option.MagicAttack){
-            playerAnimation.selectOption(PlayerAnimation.Options.MagicAttack,screen,enemyAnimation,turn);
+            playerAnimation.selectOption(PlayerAnimation.Options.MagicAttack,screen,enemyAnimation,turn,this);
         }else if(playerOption==Option.PowerUP){
-            playerAnimation.selectOption(PlayerAnimation.Options.PowerUP,screen,enemyAnimation,turn);
+            playerAnimation.selectOption(PlayerAnimation.Options.PowerUP,screen,enemyAnimation,turn,this);
         }else if(playerOption==Option.DefenseUP){
-            playerAnimation.selectOption(PlayerAnimation.Options.DefenseUP,screen,enemyAnimation,turn);
+            playerAnimation.selectOption(PlayerAnimation.Options.DefenseUP,screen,enemyAnimation,turn,this);
         }
 
         if(enemyOption==Option.Block){
-            enemyAnimation.selectOption(EnemyAnimation.Options.Block,screen,playerAnimation,turn);
+            enemyAnimation.selectOption(EnemyAnimation.Options.Block,screen,playerAnimation,turn,this);
         }else if(enemyOption==Option.SwordAttack){
-            enemyAnimation.selectOption(EnemyAnimation.Options.SwordAttack,screen,playerAnimation,turn);
+            enemyAnimation.selectOption(EnemyAnimation.Options.SwordAttack,screen,playerAnimation,turn,this);
         }else if(enemyOption==Option.MagicAttack){
-            enemyAnimation.selectOption(EnemyAnimation.Options.MagicAttack,screen,playerAnimation,turn);
+            enemyAnimation.selectOption(EnemyAnimation.Options.MagicAttack,screen,playerAnimation,turn,this);
         }else if(enemyOption==Option.PowerUP){
-            enemyAnimation.selectOption(EnemyAnimation.Options.PowerUP,screen,playerAnimation,turn);
+            enemyAnimation.selectOption(EnemyAnimation.Options.PowerUP,screen,playerAnimation,turn,this);
         }else if(enemyOption==Option.DefenseUP){
-            enemyAnimation.selectOption(EnemyAnimation.Options.DefenseUP,screen,playerAnimation,turn);
+            enemyAnimation.selectOption(EnemyAnimation.Options.DefenseUP,screen,playerAnimation,turn,this);
         }
 
         if(playerOption==Option.Block && (enemyOption==Option.SwordAttack||enemyOption==Option.MagicAttack)){
