@@ -5,8 +5,6 @@ import javafx.animation.*;
 import javafx.scene.Node;
 
 import javafx.scene.image.ImageView;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 import javafx.beans.property.IntegerProperty;
@@ -59,7 +57,7 @@ public class CustomAnimation {
         line.play();
     }
 
-    static MediaPlayer bgm; //have to make mediaPlayer file static if not garbage collector will delete its instance
+     //have to make mediaPlayer file static if not garbage collector will delete its instance
     public void screenTransition(Node node){
 
         BattleScreen battleScreen = new BattleScreen();
@@ -69,13 +67,7 @@ public class CustomAnimation {
         fadeTransition.setToValue(0);
         fadeTransition.play();
 
-        fadeTransition.setOnFinished(e->{
-            bgm = new MediaPlayer(new Media("file:///G:/Eldritch_Knight/src/sample/media/backgroundMusic.mp3"));
-            bgm.play();
-            bgm.setCycleCount(MediaPlayer.INDEFINITE);
-            bgm.setAutoPlay(true);
-            battleScreen.start();
-        });
+        fadeTransition.setOnFinished(e->battleScreen.start());
     }
 
 

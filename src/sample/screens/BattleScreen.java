@@ -10,6 +10,8 @@ import javafx.scene.layout.Pane;
 
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import sample.Constants;
@@ -29,8 +31,8 @@ import java.util.ArrayList;
 
 public class BattleScreen {
 
-    public static  Player knight = new Player();
-    public static Enemy enemy = new Enemy();
+    public Player knight = new Player();
+    public Enemy enemy = new Enemy();
     Constants constants = new Constants();
     Feedback feedback = new Feedback();
     Rectangle rectangle;
@@ -38,9 +40,16 @@ public class BattleScreen {
     public static StackPane choiceBox = new StackPane();
     public Pane pane;
     public Scene scene;
+    static MediaPlayer bgm;
+    public StackPane stack;
 
     public  void  start(){
-
+        bgm = new MediaPlayer(new Media("file:///G:/Eldritch_Knight/src/sample/media/backgroundMusic.mp3"));
+        bgm.stop();
+        bgm.play();
+        bgm.setCycleCount(MediaPlayer.INDEFINITE);
+        bgm.setAutoPlay(true);
+        bgm.setVolume(0.6);
 
         ImageView stage = new ImageView(new Image("sample/media/fightingBackground.jpg"));
 
@@ -55,7 +64,7 @@ public class BattleScreen {
 
         pane = new Pane(enemy.enemyObject,knight.playerObject);
 
-        StackPane stack = new StackPane(stage,pane);
+        stack = new StackPane(stage,pane);
 
         rectangle = new Rectangle(780,170, Color.BLACK);
         rectangle.setArcWidth(30);
