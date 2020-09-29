@@ -1,5 +1,7 @@
 package sample.game_logic;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import sample.screens.RoamingScreen;
@@ -13,7 +15,8 @@ public class Movement extends RoamingScreen {
     public double pCoordinateY = 0;
 
     public Movement(Scene scene){
-
+        final BooleanProperty flag = new SimpleBooleanProperty();
+        flag.set(true);
         scene.setOnKeyPressed(e ->{
             try {
                 Thread.sleep(80);
@@ -22,10 +25,14 @@ public class Movement extends RoamingScreen {
             }
 
             if(pCoordinateY <-450&&pCoordinateX>-30&&pCoordinateX<30){
-                super.showDialogueBox();
+                if(flag.get()){
+                    super.showDialogueBox();
+                    flag.set(false);
+                }
             }
             else {
                 super.hideDialogueBox();
+                flag.set(true);
             }
 
             if(e.getCode()== KeyCode.UP){
@@ -55,7 +62,6 @@ public class Movement extends RoamingScreen {
             else if(e.getCode() == KeyCode.LEFT){
                 pCoordinateX = pCoordinateX - 5.0;
                 knight.playerObject.setTranslateX(pCoordinateX);
-                System.out.println(pCoordinateX);
                 knight.playerObject.setImage(knight.pLeftRunning);
                 if(pCoordinateX <-100){
                     pCoordinateX = -100;
@@ -70,6 +76,7 @@ public class Movement extends RoamingScreen {
                 }
             }
             if(e.getCode()== KeyCode.ENTER && pCoordinateY <-450&&pCoordinateX>-30&&pCoordinateX<30){
+                scene.setOnKeyPressed(null);
                 super.startBattleScreen();
             }
         });
