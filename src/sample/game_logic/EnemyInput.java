@@ -9,8 +9,8 @@ public class EnemyInput {
         this.process = process;
     }
 
-    double swordAttackDamage = 30;
-    double magicAttackDamage = 70;
+    double swordAttackDamage = 15;
+    double magicAttackDamage = 35;
     double defBuff = 0;
     int swordAttackLimit =200;
     int magicAttackLimit =5;
@@ -23,27 +23,27 @@ public class EnemyInput {
     public void optionSelector(){
         int option = random.nextInt(22);
         if (option < 8) {
-            if(swordAttackLimit>1)
+            if(swordAttackLimit>0)
                 swordAttack();
             else optionSelector();
 
         } else if (option < 14) {
-            if(magicAttackLimit>1)
+            if(magicAttackLimit>0)
                 magicAttack();
             else optionSelector();
 
         } else if (option < 17) {
-            if(atkBuffLimit>1)
+            if(atkBuffLimit>0)
                 buffAttack();
             else optionSelector();
 
         }else if(option<19){
-            if(blockLimit>1)
+            if(blockLimit>0)
                 block();
             else optionSelector();
 
         }else {
-            if(defBuffLimit>1)
+            if(defBuffLimit>0)
                 buffDefense();
             else optionSelector();
 

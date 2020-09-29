@@ -19,7 +19,7 @@ public class PlayerInput{
     }
 
     public void swordAttack(){
-        if(player.swordAttackLimit>1){
+        if(player.swordAttackLimit>0){
             screen.hideChoices();
             player.swordAttackLimit--;
             double damage = player.swordAttackDamage ;
@@ -31,7 +31,7 @@ public class PlayerInput{
         }
     }
     public void magicAttack(){
-        if(player.magicAttackLimit>1){
+        if(player.magicAttackLimit>0){
             screen.hideChoices();
             player.magicAttackLimit--;
             double damage =  player.magicAttackDamage;
@@ -43,7 +43,7 @@ public class PlayerInput{
         }
     }
     public void buffAttack(){
-        if(player.atkBuffLimit>1){
+        if(player.atkBuffLimit>0){
             screen.hideChoices();
             player.atkBuffLimit--;
             player.swordAttackDamage = player.swordAttackDamage + player.swordAttackDamage*.20;
@@ -57,7 +57,7 @@ public class PlayerInput{
         }
     }
     public void buffDefense(){
-        if(player.defBuffLimit>1){
+        if(player.defBuffLimit>0){
             screen.hideChoices();
             player.defBuffLimit--;
             player.defBuff+=.15;
@@ -68,7 +68,7 @@ public class PlayerInput{
         }
     }
     public void block(){
-        if(player.blockLimit>1){
+        if(player.blockLimit>0){
             screen.hideChoices();
             player.blockLimit--;
             detailsBars.get(4).message ="Turns: "+player.blockLimit;
