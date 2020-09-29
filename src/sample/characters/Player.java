@@ -55,8 +55,8 @@ public class Player{
 
 
 
-    public  double swordAttackDamage = 30;
-    public double magicAttackDamage = 70;
+    public  double swordAttackDamage = 15;
+    public double magicAttackDamage = 35;
     public double defBuff = 0;
     public int swordAttackLimit =200;
     public int magicAttackLimit =5;
