@@ -10,7 +10,9 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
+import sample.game_logic.Process;
 import sample.screens.BattleScreen;
+import sample.screens.ResultScreen;
 import sample.utility.CustomAnimation;
 import sample.utility.DetailsBar;
 import sample.utility.HealthBar;
@@ -25,14 +27,21 @@ public class EnemyAnimation{
     }
 
     Options option;
-    Enemy enemy = BattleScreen.enemy;
+    Enemy enemy;
+    Player player;
     PlayerAnimation playerAnimation;
     int turn;
-    public  void selectOption(Options option,BattleScreen screen,PlayerAnimation playerAnimation,int turn){
+    double damage;
+    double buff;
+    public  void selectOption(Options option, BattleScreen screen, PlayerAnimation playerAnimation, int turn, Process process){
             this.option = option;
             this.screen = screen;
             this.playerAnimation = playerAnimation;
             this.turn = turn;
+            player = screen.knight;
+            enemy = screen.enemy;
+            damage = process.enemyDamage;
+            buff = process.playerBuff;
 
     }
     DetailsBar detailsBar =new DetailsBar();
@@ -105,12 +114,11 @@ public class EnemyAnimation{
         }
     }
 
-    Player player = BattleScreen.knight;
     Glow glow = new Glow();
     SepiaTone hurt = new SepiaTone();
     TranslateTransition transition = new TranslateTransition(Duration.seconds(1));
     RotateTransition rotateTransition = new RotateTransition(Duration.seconds(1));
-
+    ResultScreen result = new ResultScreen();
     void swordAttack(){
 
         TranslateTransition playerHurt = new TranslateTransition(Duration.seconds(1),player.playerObject);
@@ -135,7 +143,7 @@ public class EnemyAnimation{
             enemy.sword.play();
             player.hurt.stop();
             player.hurt.play();
-            screen.playerHealthBar.setDamage(30, HealthBar.Damage.Player);
+            screen.playerHealthBar.setDamage((damage-damage*buff), HealthBar.Damage.Player);
             enemy.enemyObject.setImage(enemy.swordAttack);
             enemy.enemyObject.setY(250);
             player.playerObject.setEffect(hurt);
@@ -146,9 +154,14 @@ public class EnemyAnimation{
 
                 transitionRev.setOnFinished(actionEvent2 -> {
                     enemy.enemyObject.setImage(enemy.opponent);
-                    if(turn==0) {
-                        screen.showChoices();
-                    }else playerAnimation.run();
+                    if(screen.playerHealthBar.health<=0){
+                        result.showResults(screen, ResultScreen.Winner.Enemy);
+                    }else{
+                        if(turn==0) {
+                            screen.showChoices();
+                        }else playerAnimation.run();
+                    }
+
                 });
 
             });
@@ -191,15 +204,20 @@ public class EnemyAnimation{
                 playerHurt.play();
                 player.hurt.stop();
                 player.hurt.play();
-                screen.playerHealthBar.setDamage(60, HealthBar.Damage.Player);
+                screen.playerHealthBar.setDamage((damage-damage*buff), HealthBar.Damage.Player);
                 player.playerObject.setEffect(hurt);
                 playerHurt.setOnFinished(actionEvent2 -> {
                     enemy.enemyObject.setImage(enemy.opponent);
                     enemy.enemyObject.setY(250);
                     player.playerObject.setEffect(null);
-                    if(turn==0) {
-                        screen.showChoices();
-                    }else playerAnimation.run();
+                    if(screen.playerHealthBar.health<=0){
+                        result.showResults(screen, ResultScreen.Winner.Enemy);
+                    }else{
+                        if(turn==0) {
+                            screen.showChoices();
+                        }else playerAnimation.run();
+                    }
+
                 });
             });
         });
